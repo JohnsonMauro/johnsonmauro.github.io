@@ -178,7 +178,6 @@ const en: Dict = {
         'Shipped a bilingual English-school platform from v1.0 to v2.4: 91 commits, 14 merged PRs, push-to-deploy CI, built with Next.js 16.',
         'Reached Lighthouse mobile scores of 96 accessibility, 100 best practices and 100 SEO after a WCAG 2.2 AA pass.',
         'Closed a 10-finding OWASP-aligned audit, adding HSTS, CSP and COOP headers and patching 16 vulnerable dependencies.',
-        'Designed a multi-tenant REST API with 19 endpoints, role-based JWT and 11 documented ADRs, tested against real PostgreSQL in Go.',
       ],
     },
     {

@@ -182,7 +182,6 @@ const pt: Dict = {
         'Entreguei a plataforma bilíngue de uma escola de inglês da v1.0 à v2.4: 91 commits, 14 PRs mergeados, deploy contínuo, em Next.js 16.',
         'Atingi no Lighthouse mobile 96 em acessibilidade, 100 em boas práticas e 100 em SEO após adequação WCAG 2.2 AA.',
         'Fechei uma auditoria alinhada ao OWASP com 10 achados, adicionando headers HSTS, CSP e COOP e corrigindo 16 dependências vulneráveis.',
-        'Desenhei uma API REST multi-tenant com 19 endpoints, JWT com papéis e 11 ADRs documentados, testada contra PostgreSQL real, em Go.',
       ],
     },
     {
