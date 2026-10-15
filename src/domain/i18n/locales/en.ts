@@ -59,7 +59,7 @@ const en: Dict = {
     summary:
       'Software engineer with 13+ years across telecom, healthcare, retail and education, from .NET ERPs and RPA bots to web and mobile apps in React, Angular, TypeScript and Node.js. I modernize legacy systems while they keep shipping and back each change with tests. Since 2026 I also deliver with AI coding agents: I write the specs, delegate implementation and verify every diff with tests and review.',
     current:
-      'Co-leading the React 19 rewrite of a US telephony platform and, as partner in an ERP startup, building its field-sales mobile app.',
+      'Co-leading the React 19 rewrite of a US telephony platform and, as partner at Hargen Software, building its ErpAI field-sales mobile app.',
     currentLabel: 'Current focus',
     stats: [
       { value: '13+', label: 'Years shipping software' },
@@ -160,11 +160,12 @@ const en: Dict = {
       chapter: 'modernization',
       role: 'Partner & Software Engineer',
       period: 'May 2026 - Present',
-      org: 'ERP startup',
+      org: 'Hargen Software',
+      url: 'https://www.hargensoftware.com.br/',
       bullets: [
-        'Built a field-sales mobile app solo in 6 weeks: 92 commits, 13 screens, ~18k lines, using Expo SDK 56, React Native 0.85 and TypeScript.',
+        'Built the ErpAI field-sales app solo in 4.5 months, shipping 8 Android releases to testers via Firebase (Expo, React Native, TypeScript).',
         'Designed offline-first ordering across 8 DDD modules, queuing orders in on-device SQLite and syncing in the background.',
-        'Wrote ~347 unit and component tests; 53% of commits were paired with Claude Code, guided by 8 custom project skills.',
+        'Wrote ~350 unit and component tests; 52% of commits were paired with Claude Code, guided by 8 custom project skills.',
         'Delivered the ERP returns module in 5 phases (~6k lines), covering the .NET 10 API, a React wizard and returns e-invoicing.',
       ],
     },

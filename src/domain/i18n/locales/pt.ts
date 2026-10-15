@@ -63,7 +63,7 @@ const pt: Dict = {
     summary:
       'Engenheiro de software com 13+ anos em telecom, saúde, varejo e educação, de ERPs em .NET e bots de RPA a apps web e mobile em React, Angular, TypeScript e Node.js. Modernizo legado sem parar as entregas, com testes em cada mudança. Desde 2026 também entrego com agentes de IA: escrevo specs, delego a implementação e valido cada diff com testes e revisão.',
     current:
-      'Coliderando a reescrita em React 19 de uma plataforma de telefonia americana e construindo, como sócio, o app mobile de força de vendas de uma startup de ERP.',
+      'Coliderando a reescrita em React 19 de uma plataforma de telefonia americana e construindo, como sócio da Hargen Software, o app mobile de força de vendas do ErpAI.',
     currentLabel: 'Foco atual',
     stats: [
       { value: '13+', label: 'Anos entregando software' },
@@ -164,11 +164,12 @@ const pt: Dict = {
       chapter: 'modernization',
       role: 'Sócio & Software Engineer',
       period: 'Mai 2026 - Presente',
-      org: 'Startup de ERP',
+      org: 'Hargen Software',
+      url: 'https://www.hargensoftware.com.br/',
       bullets: [
-        'Construí sozinho um app de força de vendas em 6 semanas: 92 commits, 13 telas, ~18k linhas, em Expo SDK 56, React Native 0.85, TypeScript.',
+        'Construí sozinho o app de força de vendas do ErpAI em 4,5 meses, com 8 versões Android distribuídas via Firebase (Expo, React Native, TypeScript).',
         'Desenhei pedidos offline-first em 8 módulos DDD, enfileirando no SQLite do aparelho e sincronizando em segundo plano.',
-        'Escrevi ~347 testes unitários e de componente; 53% dos commits foram em par com Claude Code, guiados por 8 skills do projeto.',
+        'Escrevi ~350 testes unitários e de componente; 52% dos commits foram em par com Claude Code, guiados por 8 skills do projeto.',
         'Entreguei o módulo de devoluções do ERP em 5 fases (~6k linhas), cobrindo API .NET 10, wizard em React e NF-e de devolução.',
       ],
     },
