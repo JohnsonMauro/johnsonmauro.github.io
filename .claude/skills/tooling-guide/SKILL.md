@@ -24,6 +24,9 @@ An agent writes 30–50 lines of own code in minutes, but they still cost review
 3. `grep -rl '<pkg>' .claude CLAUDE.md` for rules that teach it, and its importers.
 4. Report and stop before a major or anything that changes behavior under existing code.
 5. Bump, fix the affected skills in the same change (the rule, not a version), then `pnpm lint`, `pnpm build`, `pnpm text:diff` against a baseline saved before the bump.
+   - `grep -E "^  vite@" pnpm-lock.yaml` must list one version: `astro` and `@astrojs/react` can resolve different vites after a bump. `pnpm dedupe` fixes it.
+   - Delete each `minimumReleaseAgeExclude` entry whose exact `pkg@version` no longer appears in the lockfile; pnpm leaves them behind.
+   - A release note that drops a dependency does not prove it left the tree: `pnpm why <pkg>` before removing its `allowBuilds` entry.
 6. Commit split: `chore(deps)` for `package.json` + lockfile, `docs(claude)` for skills.
 
 ## ESLint
@@ -86,6 +89,7 @@ Prettier owns layout, ESLint owns correctness. `prettier.config.mjs` explains ea
 - Retest signal: issue #79 closed and a `tailwind-csstree` release after it.
 - When it is: move the keyframes back inside `@theme`, `pnpm lint`, compare the `@keyframes` in `dist/_astro/*.css` before and after.
 - Opened 2026-09-26 with `tailwind-csstree` 0.4.0.
+- Re-checked 2026-10-15: issue #79 closed 2026-10-01, but the fix landed after 0.4.1 (still `latest`); hold stays until the next release.
 
 ## Deliberate hold: eslint-plugin-react peer
 
@@ -93,7 +97,7 @@ Prettier owns layout, ESLint owns correctness. `prettier.config.mjs` explains ea
 
 - Retest signal: `pnpm view eslint-plugin-react peerDependencies` lists the ESLint major in use.
 - When it does: remove the `peerDependencyRules` entry, `pnpm install`, `pnpm lint`.
-- Re-checked 2026-09-26: latest `eslint-plugin-react` is 7.37.5 (published 2025-04), peer range still ends at `^9.7`. Hold stays.
+- Re-checked 2026-10-15: latest `eslint-plugin-react` is 7.37.5 (published 2025-04), peer range still ends at `^9.7`. Hold stays.
 
 ## TypeScript config
 
@@ -109,7 +113,7 @@ Prettier owns layout, ESLint owns correctness. `prettier.config.mjs` explains ea
 
 - Retest signal: `pnpm view @astrojs/check peerDependencies` includes the current typescript major.
 - When it does: bump `typescript`, run `pnpm check`.
-- Re-checked 2026-09-26: `@astrojs/check` 0.9.10, peer `^5.0.0 || ^6.0.0`; typescript latest 7.0.2.
+- Re-checked 2026-10-15: `@astrojs/check` 0.9.10, peer `^5.0.0 || ^6.0.0`; typescript latest 7.0.2.
 
 ## pnpm and supply chain
 
