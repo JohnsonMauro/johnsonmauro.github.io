@@ -136,10 +136,12 @@ Policy: the project runs on the newest **LTS** line (recent and stable), never o
 | Place | What |
 |---|---|
 | `.nvmrc` → `lts/*` | The single source. `nvm use` resolves it locally |
-| `.github/workflows/ci.yml` and `deploy.yml` → `setup-node` `node-version-file: .nvmrc` | `setup-node` resolves `lts/*` against the official manifest on every run, so CI and the deploy move to a new LTS line the day Node promotes it |
+| `.github/workflows/ci.yml` and `deploy.yml` → `setup-node` `node-version-file: .nvmrc` **plus `check-latest: true`** | `setup-node` resolves `lts/*` against the official manifest on every run, so CI and the deploy move to a new LTS line the day Node promotes it. `check-latest` is what brings the newest **patch** of that line (security releases); never drop it |
 | `package.json` → `engines.node` | Only the floor (lowest version known to work). Raise it when the code starts needing something newer, not on every LTS |
 
 Verified 2026-09-26 in the sources, not assumed: `setup-node` v7 reads a plain `.nvmrc` value as-is and resolves `lts/*` to the highest manifest entry with an `lts` codename (`official_builds.ts`, `resolveLtsAliasFromManifest`); nvm 0.40 resolves the same file to the latest LTS.
+
+But `resolveLtsAliasFromManifest` returns only the **major** (`release.version.split('.')[0]`), and the tool-cache lookup then accepts any cached patch of it. Without `check-latest` the runner image's Node wins: on 2026-10-26 (setup-node v7.1.0) the deploy logged `Found in cache @ …/node/24.21.0` six days after 24.22.1 fixed CVE-2026-111497. After touching these workflows, read the job log: `Resolved as '<version>'` must name the newest patch, and `node: v…` must match it.
 
 Because the switch is automatic, a new LTS line reaches CI without a commit. When one is announced (Node's release schedule: new even major goes LTS in late October), run `pnpm install`, `pnpm lint`, `pnpm check`, `pnpm build` and `pnpm text:diff` locally on it first (`nvm install --lts`). Native dependencies (`sharp`, `esbuild`) need a prebuilt binary for the new ABI. If it breaks, pin `.nvmrc` to the previous major until it is fixed.
 
