@@ -63,6 +63,7 @@ Prettier owns layout, ESLint owns correctness. `prettier.config.mjs` explains ea
 - Probe: `printf -- '---\n---\n<p class="uppercase p-4 flex">x</p>\n' | pnpm exec prettier --stdin-filepath src/probe.astro` must print the classes reordered (`flex p-4 uppercase`).
 - When it does: add the plugin **last** in `plugins`, set `tailwindStylesheet: './src/styles/global.css'`, format in its own `style:` commit and check `text:diff`.
 - Opened 2026-09-26 with prettier-plugin-astro 1.1.0.
+- Re-checked 2026-10-26: `prettier-plugin-tailwindcss` 0.8.1 still latest, issue #451 open. Hold stays.
 
 ## Pre-commit hook
 
@@ -89,7 +90,7 @@ Prettier owns layout, ESLint owns correctness. `prettier.config.mjs` explains ea
 - Retest signal: issue #79 closed and a `tailwind-csstree` release after it.
 - When it is: move the keyframes back inside `@theme`, `pnpm lint`, compare the `@keyframes` in `dist/_astro/*.css` before and after.
 - Opened 2026-09-26 with `tailwind-csstree` 0.4.0.
-- Re-checked 2026-10-15: issue #79 closed 2026-10-01, but the fix landed after 0.4.1 (still `latest`); hold stays until the next release.
+- Re-checked 2026-10-26: issue #79 closed 2026-10-01, but the fix landed after 0.4.1 (still `latest`); hold stays until the next release.
 
 ## Deliberate hold: eslint-plugin-react peer
 
@@ -97,7 +98,7 @@ Prettier owns layout, ESLint owns correctness. `prettier.config.mjs` explains ea
 
 - Retest signal: `pnpm view eslint-plugin-react peerDependencies` lists the ESLint major in use.
 - When it does: remove the `peerDependencyRules` entry, `pnpm install`, `pnpm lint`.
-- Re-checked 2026-10-15: latest `eslint-plugin-react` is 7.37.5 (published 2025-04), peer range still ends at `^9.7`. Hold stays.
+- Re-checked 2026-10-26: latest `eslint-plugin-react` is 7.37.5 (published 2025-04), peer range still ends at `^9.7`. Hold stays.
 
 ## TypeScript config
 
@@ -109,11 +110,16 @@ Prettier owns layout, ESLint owns correctness. `prettier.config.mjs` explains ea
 
 ## Deliberate hold: typescript 6 line
 
-`@astrojs/check` declares `typescript` as a peer with `^5 || ^6`, so `typescript` stays on the 6 line although a newer major exists.
+`typescript` stays on the 6 line although TypeScript 7 (the native compiler) is out. Two things block installing 7 as `typescript`:
 
-- Retest signal: `pnpm view @astrojs/check peerDependencies` includes the current typescript major.
-- When it does: bump `typescript`, run `pnpm check`.
-- Re-checked 2026-10-15: `@astrojs/check` 0.9.10, peer `^5.0.0 || ^6.0.0`; typescript latest 7.0.2.
+- `@astrojs/check` declares `typescript` as a peer with `^5 || ^6`, and aborts with 7 installed under that name.
+- TypeScript 7 ships only the `tsc` binary, without the JavaScript API. `typescript-eslint` calls `require('typescript')` even just to parse, so lint breaks; its peer range ends below 7.
+
+The side-by-side alias (`"@typescript/native": "npm:typescript@7.x"` plus `"typescript": "npm:@typescript/typescript6@6.x"`) makes both tools work, but buys nothing here: `pnpm check` (`astro check`) is the only type-check, it keeps running on the 6 API, and TypeScript 7's `tsc` does not read `.astro` files. Adopt the alias only if a gate that runs `tsc` on its own is added.
+
+- Retest signal: `pnpm view @astrojs/check peerDependencies` and `pnpm view @typescript-eslint/parser peerDependencies` both include the current typescript major.
+- When they do: bump `typescript`, run `pnpm check` and `pnpm lint`.
+- Re-checked 2026-10-26: `@astrojs/check` 0.9.12, peer `^5.0.0 || ^6.0.0`; `@typescript-eslint/parser` 8.72.0, peer `>=4.8.4 <6.1.0` (TS 7 support is typescript-eslint issue #10940, open); typescript latest 7.0.2.
 
 ## pnpm and supply chain
 
