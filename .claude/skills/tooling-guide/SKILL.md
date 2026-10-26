@@ -137,7 +137,7 @@ Policy: the project runs on the newest **LTS** line (recent and stable), never o
 |---|---|
 | `.nvmrc` → `lts/*` | The single source. `nvm use` resolves it locally |
 | `.github/workflows/ci.yml` and `deploy.yml` → `setup-node` `node-version-file: .nvmrc` **plus `check-latest: true`** | `setup-node` resolves `lts/*` against the official manifest on every run, so CI and the deploy move to a new LTS line the day Node promotes it. `check-latest` is what brings the newest **patch** of that line (security releases); never drop it |
-| `package.json` → `engines.node` | Only the floor (lowest version known to work). Raise it when the code starts needing something newer, not on every LTS |
+| `package.json` → `engines.node` | Only the floor: the lowest version known to work **and not vulnerable**. Raise it when the code starts needing something newer, and to the patched release after a Node security release; not on every LTS |
 
 Verified 2026-09-26 in the sources, not assumed: `setup-node` v7 reads a plain `.nvmrc` value as-is and resolves `lts/*` to the highest manifest entry with an `lts` codename (`official_builds.ts`, `resolveLtsAliasFromManifest`); nvm 0.40 resolves the same file to the latest LTS.
 
