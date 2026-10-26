@@ -5,8 +5,15 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://johnsonmauro.github.io',
-  base: '/johnson-portfolio',
   trailingSlash: 'ignore',
+  // The site used to live under /johnson-portfolio; keep shared links working.
+  redirects: {
+    '/johnson-portfolio': '/',
+    '/johnson-portfolio/en': '/en/',
+    '/johnson-portfolio/pt': '/pt/',
+    '/johnson-portfolio/en/cv': '/en/cv/',
+    '/johnson-portfolio/pt/cv': '/pt/cv/',
+  },
   output: 'static',
   i18n: {
     defaultLocale: 'en',

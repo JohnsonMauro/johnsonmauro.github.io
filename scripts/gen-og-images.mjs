@@ -35,7 +35,7 @@ const palette = Object.fromEntries(
     ),
   ].map(([, name, hex]) => [name, hex]),
 );
-const siteLabel = `${new URL(astroConfig.site).host}${astroConfig.base}`;
+const siteLabel = `${new URL(astroConfig.site).host}${astroConfig.base ?? ''}`;
 
 const escape = (text) =>
   text.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);

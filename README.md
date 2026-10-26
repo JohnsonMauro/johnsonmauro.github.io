@@ -1,14 +1,14 @@
 # Johnson Mauro — Portfolio & CV
 
-[![Deploy to GitHub Pages](https://github.com/JohnsonMauro/johnson-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/JohnsonMauro/johnson-portfolio/actions/workflows/deploy.yml)
+[![Deploy to GitHub Pages](https://github.com/JohnsonMauro/johnsonmauro.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/JohnsonMauro/johnsonmauro.github.io/actions/workflows/deploy.yml)
 
 Personal portfolio of Johnson Mauro, software engineer, with a printable CV
 built from the same content. English and Brazilian Portuguese.
 
-**Live:** [Portfolio (EN)](https://johnsonmauro.github.io/johnson-portfolio/en/) ·
-[Portfólio (PT-BR)](https://johnsonmauro.github.io/johnson-portfolio/pt/) ·
-[CV (EN)](https://johnsonmauro.github.io/johnson-portfolio/en/cv/) ·
-[CV (PT-BR)](https://johnsonmauro.github.io/johnson-portfolio/pt/cv/)
+**Live:** [Portfolio (EN)](https://johnsonmauro.github.io/en/) ·
+[Portfólio (PT-BR)](https://johnsonmauro.github.io/pt/) ·
+[CV (EN)](https://johnsonmauro.github.io/en/cv/) ·
+[CV (PT-BR)](https://johnsonmauro.github.io/pt/cv/)
 
 ![Portfolio hero: the name over an animated network of connected people in brand blues](docs/preview.jpg)
 
@@ -45,7 +45,7 @@ version pinned in `packageManager` in `package.json`.
 
 ```bash
 pnpm install     # also installs the pre-commit hook
-pnpm dev         # http://localhost:4321/johnson-portfolio/
+pnpm dev         # http://localhost:4321/
 ```
 
 | Command | What it does |
