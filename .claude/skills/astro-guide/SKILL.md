@@ -47,7 +47,7 @@ The build minifies CSS with lightningcss (through Vite); `pnpm dev` does not. `a
 
 - Routes: `src/pages/[lang]/index.astro` (portfolio) and `src/pages/[lang]/cv.astro` (printable CV). `src/pages/index.astro` is the root entry.
 - The site is served from the domain root (no `base`) and `astro.config.mjs` sets `prefixDefaultLocale: true`. Public assets still resolve through `asset()` in `src/shared/lib/asset.ts`, which strips the trailing slash from `import.meta.env.BASE_URL`, so a base path can come back without touching components. Never hardcode a path prefix.
-- The site lived under `/johnson-portfolio` until 2026-10; `redirects` in `astro.config.mjs` keeps those shared URLs pointing at the root pages. A new top-level route needs no entry there.
+- The site lived under `/johnson-portfolio` until 2026-10; `redirects` in `astro.config.mjs` keeps those shared URLs pointing at the root pages. A new top-level route needs no entry there. Link cards cached by social networks still ask for `/johnson-portfolio/assets/img/og-<lang>.png`; `src/pages/johnson-portfolio/assets/img/[file].ts` serves the current images there (a redirect page would not work for an image).
 - Every visible string comes from a locale dictionary (`locale-copy-guide`).
 
 ## Prove the rendered text did not change
